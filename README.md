@@ -51,7 +51,7 @@ Desenvolver uma solução mobile intuitiva que permita ao usuário visualizar, s
    ```bash
    git clone https://github.com/seu-usuario/HortiFruti.git
    cd HortiFruti
-   npm install --legacy-peer-deps
+   npm install
    npx expo start
 
 ## ⛔ Dependências a serem instaladas
