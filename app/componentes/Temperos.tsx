@@ -1,24 +1,28 @@
 import { FlatList, Image, Text, View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useState } from 'react';
+import { useCarrinho } from '../componentes/CarrinhoContext';
 
 const produtos = [
   {
     id: '1',
     nome: 'Alecrim',
-    preco: 'R$ 1,99/un',
+    preco: 1.99,
+    unidade: 'un',
     imagem: require('../../assets/images/Alecrim.png'),
   },
   {
     id: '2',
     nome: 'Açafrão',
-    preco: 'R$ 2,99/un',
+    preco: 2.99,
+    unidade: 'un',
     imagem: require('../../assets/images/Açafrão.png'),
   },
   {
     id: '3',
     nome: 'Cominho',
-    preco: 'R$ 0,99/un',
+    preco: 0.99,
+    unidade: 'un',
     imagem: require('../../assets/images/Cominho.png'),
   },
 ];
@@ -29,7 +33,7 @@ function ProdutoCard({ item, onAdicionar, favorito, onFavoritar }) {
     <View style={styles.card}>
       <Image source={item.imagem} style={styles.imagem} />
       <Text style={styles.nome}>{item.nome}</Text>
-      <Text style={styles.preco}>{item.preco}</Text>
+      <Text style={styles.preco}>{`R$ ${item.preco.toFixed(2)}/${item.unidade}`}</Text>
       <View style={styles.botoesContainer}>
         <TouchableOpacity
           style={styles.botao}
@@ -54,10 +58,17 @@ function ProdutoCard({ item, onAdicionar, favorito, onFavoritar }) {
   );
 }
 
-export default function Cards() {
+export default function Temperos() {
   const [favoritos, setFavoritos] = useState<string[]>([]);
+  const { adicionarProduto } = useCarrinho();
 
   function handleAdicionar(item: any) {
+    adicionarProduto({
+      id: item.id,
+      nome: item.nome,
+      preco: item.preco,
+      imagem: item.imagem,
+    });
     Alert.alert('Adicionado', `${item.nome} foi adicionado ao carrinho!`);
   }
 

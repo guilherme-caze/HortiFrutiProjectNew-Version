@@ -1,6 +1,10 @@
 import { FlatList, Image, Text, View, StyleSheet, TouchableOpacity, Alert, Dimensions } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useState } from 'react';
+import React from 'react';
+import { useCarrinho } from './CarrinhoContext'; 
+
+// top 10 códigos dos animes
 
 const produtos = [
   {
@@ -42,29 +46,40 @@ const produtos = [
 ];
 
 // Componente separado para o Card
-export function ProdutoCard({ item, onAdicionar, favorito, onFavoritar, carrossel }) {
+export function ProdutoCard({ item, onAdicionar, favorito, onFavoritar, carrossel, customStyles }) {
+  // Use os estilos do customStyles se vierem por prop, senão use os padrões
+  const s = customStyles || styles;
+
   return (
-    <View style={[styles.card, carrossel && styles.carrosselCard]}>
-      <Image source={item.imagem} style={[styles.imagem, carrossel && styles.carrosselImagem]} />
-      <Text style={[styles.nome, carrossel && styles.carrosselNome]}>{item.nome}</Text>
-      <Text style={[styles.preco, carrossel && styles.carrosselPreco]}>{item.preco}</Text>
-      <View style={[styles.botoesContainer, carrossel && styles.carrosselBotoesContainer]}>
+    <View style={carrossel ? s.carrosselCard : s.card}>
+      <Image
+        source={item.imagem}
+        style={carrossel ? s.carrosselImagem : s.imagem}
+        resizeMode="contain"
+      />
+      <Text style={carrossel ? s.carrosselNome : s.nome}>{item.nome}</Text>
+      <Text style={carrossel ? s.carrosselPreco : s.preco}>
+        {typeof item.preco === 'number'
+          ? `R$ ${item.preco.toFixed(2)}/${item.unidade ?? ''}`
+          : item.preco}
+      </Text>
+      <View style={carrossel ? s.carrosselBotoesContainer : s.botoesContainer}>
         <TouchableOpacity
-          style={[styles.botao, carrossel && styles.carrosselBotao]}
+          style={carrossel ? s.carrosselBotao : s.botao}
           onPress={() => onAdicionar(item)}
-          activeOpacity={0.7}
         >
-          <Text style={[styles.botaoTexto, carrossel && styles.carrosselBotaoTexto]}>Adicionar</Text>
+          <Text style={carrossel ? s.carrosselBotaoTexto : s.botaoTexto}>
+            Adicionar
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.coracao, carrossel && styles.carrosselCoracao]}
           onPress={() => onFavoritar(item.id)}
-          activeOpacity={0.7}
+          style={carrossel ? s.carrosselCoracao : s.coracao}
         >
           <FontAwesome
             name={favorito ? 'heart' : 'heart-o'}
-            size={carrossel ? 32 : 25}
-            color={favorito ? '#FF6347' : '#97C447'}
+            size={20}
+            color={favorito ? '#FF0000' : '#888'}
           />
         </TouchableOpacity>
       </View>
@@ -74,8 +89,20 @@ export function ProdutoCard({ item, onAdicionar, favorito, onFavoritar, carrosse
 
 export default function Cards() {
   const [favoritos, setFavoritos] = useState<string[]>([]);
+  const { adicionarProduto } = useCarrinho();
 
   function handleAdicionar(item: any) {
+    // Aqui converta o preço para número, se necessário
+    let preco = item.preco;
+    if (typeof preco === 'string') {
+      preco = Number(preco.replace(/[^\d,]/g, '').replace(',', '.'));
+    }
+    adicionarProduto({
+      id: item.id,
+      nome: item.nome,
+      preco,
+      imagem: item.imagem,
+    });
     Alert.alert('Adicionado', `${item.nome} foi adicionado ao carrinho!`);
   }
 

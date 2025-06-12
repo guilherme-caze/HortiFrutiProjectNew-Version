@@ -1,5 +1,5 @@
 import { FlatList, Image, Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
 const produtos = [
   {
@@ -15,20 +15,30 @@ const produtos = [
 ];
 
 export default function Cards() {
+  const router = useRouter();
+
+  const handleVisitar = (id: string) => {
+    if (id === '1') {
+      router.push('/atacado');
+    } else if (id === '2') {
+      router.push('/seuze');
+    }
+  };
+
   return (
     <FlatList
       data={produtos}
       keyExtractor={(item) => item.id}
       numColumns={2}
       contentContainerStyle={styles.lista}
-      scrollEnabled={false} //
+      scrollEnabled={false}
       renderItem={({ item }) => (
         <View style={styles.card}>
           <Image source={item.imagem} style={styles.imagem} />
           <Text style={styles.nome}>{item.nome}</Text>
           <View style={styles.botoesContainer}>
-            <TouchableOpacity style={styles.botao}>
-              <Text style={styles.botaoTexto}>Viisitar</Text>
+            <TouchableOpacity style={styles.botao} onPress={() => handleVisitar(item.id)}>
+              <Text style={styles.botaoTexto}>Visitar</Text>
             </TouchableOpacity>
           </View>
         </View>

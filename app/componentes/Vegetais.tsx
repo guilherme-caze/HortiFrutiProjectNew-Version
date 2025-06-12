@@ -1,44 +1,15 @@
 import { FlatList, Image, Text, View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useState } from 'react';
+import { useCarrinho } from '../componentes/CarrinhoContext';
 
 const produtos = [
-  {
-    id: '1',
-    nome: 'Abóbora',
-    preco: 'R$ 8,99/kg',
-    imagem: require('../../assets/images/Abobora.png'),
-  },
-  {
-    id: '2',
-    nome: 'Brócolis',
-    preco: 'R$ 2,99/kg',
-    imagem: require('../../assets/images/Brocolis.png'),
-  },
-  {
-    id: '3',
-    nome: 'Tomate',
-    preco: 'R$ 4,99/kg',
-    imagem: require('../../assets/images/Tomate.png'),
-  },
-  {
-    id: '4',
-    nome: 'Beterraba',
-    preco: 'R$ 3,50/kg',
-    imagem: require('../../assets/images/Beterraba.png'),
-  },
-  {
-    id: '5',
-    nome: 'Cebola',
-    preco: 'R$ 7,99/kg',
-    imagem: require('../../assets/images/Cebola.png'),
-  },
-  {
-    id: '6',
-    nome: 'Mandioca',
-    preco: 'R$ 10,99/kg',
-    imagem: require('../../assets/images/Mandioca.png'),
-  },
+  { id: '1', nome: 'Abóbora', preco: 8.99, unidade: 'kg', imagem: require('../../assets/images/Abobora.png') },
+  { id: '2', nome: 'Brócolis', preco: 2.99, unidade: 'kg', imagem: require('../../assets/images/Brocolis.png') },
+  { id: '3', nome: 'Tomate', preco: 4.99, unidade: 'kg', imagem: require('../../assets/images/Tomate.png') },
+  { id: '4', nome: 'Beterraba', preco: 3.50, unidade: 'kg', imagem: require('../../assets/images/Beterraba.png') },
+  { id: '5', nome: 'Cebola', preco: 7.99, unidade: 'kg', imagem: require('../../assets/images/Cebola.png') },
+  { id: '6', nome: 'Mandioca', preco: 10.99, unidade: 'kg', imagem: require('../../assets/images/Mandioca.png') },
 ];
 
 // Componente separado para o Card
@@ -47,7 +18,7 @@ function ProdutoCard({ item, onAdicionar, favorito, onFavoritar }) {
     <View style={styles.card}>
       <Image source={item.imagem} style={styles.imagem} />
       <Text style={styles.nome}>{item.nome}</Text>
-      <Text style={styles.preco}>{item.preco}</Text>
+      <Text style={styles.preco}>{`R$ ${item.preco.toFixed(2)}/${item.unidade}`}</Text>
       <View style={styles.botoesContainer}>
         <TouchableOpacity
           style={styles.botao}
@@ -72,10 +43,17 @@ function ProdutoCard({ item, onAdicionar, favorito, onFavoritar }) {
   );
 }
 
-export default function Cards() {
+export default function Vegetais() {
   const [favoritos, setFavoritos] = useState<string[]>([]);
+  const { adicionarProduto } = useCarrinho();
 
   function handleAdicionar(item: any) {
+    adicionarProduto({
+      id: item.id,
+      nome: item.nome,
+      preco: item.preco,
+      imagem: item.imagem,
+    });
     Alert.alert('Adicionado', `${item.nome} foi adicionado ao carrinho!`);
   }
 

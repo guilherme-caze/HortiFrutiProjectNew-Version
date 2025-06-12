@@ -15,7 +15,7 @@ export default function TabOneScreen() {
         <Comercios />
 
         {/* texto */}
-        <Text style={styles.title2}>Produtos</Text>
+        <Text style={styles.title2}>Produto</Text>
 
         {/* Cards */}
         <Cards />

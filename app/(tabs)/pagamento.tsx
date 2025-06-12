@@ -16,10 +16,24 @@ export default function CadastroScreen() {
   const [validadeCartao, setValidadeCartao] = useState('');
   const [cvv, setCvv] = useState('');
   const [cpf, setCpf] = useState('');
+  const [nome, setNome] = useState('');
+  const [numeroCartao, setNumeroCartao] = useState('');
+  const [endereco, setEndereco] = useState('');
 
   const router = useRouter();
 
   const handleCadastro = () => {
+    if (
+      !nome ||
+      !numeroCartao ||
+      validadeCartao.length < 5 ||
+      cvv.length < 3 ||
+      cpf.length < 14 ||
+      !endereco
+    ) {
+      Alert.alert('Preencha todos os campos corretamente!');
+      return;
+    }
     Alert.alert('Compra realizada com sucesso!');
   };
 
@@ -43,7 +57,7 @@ export default function CadastroScreen() {
       <View style={styles.container}>
         <View style={styles.card}>
 
-          <TouchableOpacity onPress={() => router.push('/menu')}>
+          <TouchableOpacity onPress={() => router.replace('/carrinho')}>
             <Image
               source={require('../../assets/images/seta.png')}
               style={styles.image}
@@ -54,7 +68,12 @@ export default function CadastroScreen() {
 
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Nome completo</Text>
-            <TextInput style={styles.input} placeholder="Digite seu nome" />
+            <TextInput
+              style={styles.input}
+              placeholder="Digite seu nome"
+              value={nome}
+              onChangeText={setNome}
+            />
           </View>
 
           <View style={styles.inputGroup}>
@@ -64,6 +83,8 @@ export default function CadastroScreen() {
               keyboardType="numeric"
               placeholder="0000 0000 0000 0000"
               maxLength={19}
+              value={numeroCartao}
+              onChangeText={setNumeroCartao}
             />
           </View>
 
@@ -109,7 +130,12 @@ export default function CadastroScreen() {
 
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Endereço</Text>
-            <TextInput style={styles.input} placeholder="Rua Exemplo, 123" />
+            <TextInput
+              style={styles.input}
+              placeholder="Rua Exemplo, 123"
+              value={endereco}
+              onChangeText={setEndereco}
+            />
           </View>
 
           <TouchableOpacity style={styles.button} onPress={handleCadastro}>

@@ -6,38 +6,38 @@ import { useCarrinho } from '../componentes/CarrinhoContext';
 const produtos = [
   {
     id: '1',
-    nome: 'Abacaxi',
-    preco: 6.99,
+    nome: 'Abobora',
+    preco: 19.99,
     unidade: 'un',
-    imagem: require('../../assets/images/Abacaxi.png'),
+    imagem: require('../../assets/images/Abobora.png'),
   },
   {
     id: '2',
-    nome: 'Açafrão',
+    nome: 'Brocolis',
     preco: 2.99,
-    unidade: 'un',
-    imagem: require('../../assets/images/Açafrão.png'),
+    unidade: 'kg',
+    imagem: require('../../assets/images/Brocolis.png'),
   },
   {
     id: '3',
-    nome: 'Pera',
+    nome: 'Beterraba',
     preco: 5.99,
     unidade: 'kg',
-    imagem: require('../../assets/images/Pera.png'),
+    imagem: require('../../assets/images/Beterraba.png'),
   },
   {
     id: '4',
-    nome: 'Cominho',
-    preco: 0.99,
+    nome: 'Cebola',
+    preco: 3.00,
     unidade: 'un',
-    imagem: require('../../assets/images/Cominho.png'),
+    imagem: require('../../assets/images/Cebola.png'),
   },
   {
     id: '5',
-    nome: 'Tomate',
+    nome: 'Alecrim',
     preco: 4.99,
     unidade: 'kg',
-    imagem: require('../../assets/images/Tomate.png'),
+    imagem: require('../../assets/images/Alecrim.png'),
   },
 ];
 
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   preco: {
     fontSize: 14,
     color: '#444',
-    marginTop: 0,
+    marginTop: 2,
   },
   botoesContainer: {
     flexDirection: 'row',
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   botaoTexto: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 14,
   },
   coracao: {
     marginLeft: 10,

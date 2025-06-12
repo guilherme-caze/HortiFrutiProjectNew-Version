@@ -7,16 +7,16 @@ const produtos = [
   {
     id: '1',
     nome: 'Abacaxi',
-    preco: 6.99,
+    preco: 1.99,
     unidade: 'un',
     imagem: require('../../assets/images/Abacaxi.png'),
   },
   {
     id: '2',
-    nome: 'Açafrão',
+    nome: 'Banana',
     preco: 2.99,
-    unidade: 'un',
-    imagem: require('../../assets/images/Açafrão.png'),
+    unidade: 'kg',
+    imagem: require('../../assets/images/bananas.jpg'),
   },
   {
     id: '3',
@@ -27,17 +27,17 @@ const produtos = [
   },
   {
     id: '4',
-    nome: 'Cominho',
-    preco: 0.99,
+    nome: 'Laranja',
+    preco: 3.00,
     unidade: 'un',
-    imagem: require('../../assets/images/Cominho.png'),
+    imagem: require('../../assets/images/Laranja.png'),
   },
   {
     id: '5',
-    nome: 'Tomate',
+    nome: 'Maçãs',
     preco: 4.99,
     unidade: 'kg',
-    imagem: require('../../assets/images/Tomate.png'),
+    imagem: require('../../assets/images/Maçãs.png'),
   },
 ];
 
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   preco: {
     fontSize: 14,
     color: '#444',
-    marginTop: 0,
+    marginTop: 2,
   },
   botoesContainer: {
     flexDirection: 'row',
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   botaoTexto: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 14,
   },
   coracao: {
     marginLeft: 10,

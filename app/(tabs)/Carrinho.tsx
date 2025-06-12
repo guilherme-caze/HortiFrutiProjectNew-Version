@@ -1,69 +1,41 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { Platform, StyleSheet, FlatList, TouchableOpacity, Alert } from 'react-native';
 import { Text, View } from '@/components/Themed';
 import BarraInferior from '@/app/componentes/barraInferior';
 import CarrinhoItemCard from '@/app/componentes/CarrinhoItemCard';
-
-const produtosExemplo = [ //Teste para os produtos do carrinho, a ideia é usar os do menu quando a pessoa clicar em adicionar
-  {
-    id: '1',
-    nome: 'Abacaxi',
-    preco: 15.5,
-    imagem: require('../../assets/images/Abacaxi.png'),
-  },
-  {
-    id: '2',
-    nome: 'Pera',
-    preco: 5.9,
-    imagem: require('../../assets/images/Pera.png'),
-  },
-  {
-    id: '3',
-    nome: 'Maçã',
-    preco: 3.9,
-    imagem: require('../../assets/images/Maçãs.png'),
-  },
-];
+import { useCarrinho } from '../componentes/CarrinhoContext'; 
+import { useRouter } from 'expo-router';
 
 export default function ModalScreen() {
-  const [carrinho, setCarrinho] = useState(produtosExemplo.map(p => ({
-    ...p,
-    quantidade: 1,
-    selecionado: true,
-  })));
+  const {
+    carrinho,
+    incrementar,
+    decrementar,
+    remover,
+    selecionar,
+    desmarcarTodos,
+  } = useCarrinho();
 
-  const incrementar = (id: string) => {
-    setCarrinho(carrinho.map(item =>
-      item.id === id ? { ...item, quantidade: item.quantidade + 1 } : item
-    ));
-  };
-
-  const decrementar = (id: string) => {
-    setCarrinho(carrinho.map(item =>
-      item.id === id && item.quantidade > 1 ? { ...item, quantidade: item.quantidade - 1 } : item
-    ));
-  };
-
-  const remover = (id: string) => {
-    setCarrinho(carrinho.filter(item => item.id !== id));
-  };
-
-  const selecionar = (id: string) => {
-    setCarrinho(carrinho.map(item =>
-      item.id === id ? { ...item, selecionado: !item.selecionado } : item
-    ));
-  };
-
-  const desmarcarTodos = () => {
-    setCarrinho(carrinho.map(item => ({ ...item, selecionado: false })));
-  };
+  const router = useRouter();
 
   const subtotal = carrinho
     .filter(item => item.selecionado)
     .reduce((acc, item) => acc + item.preco * item.quantidade, 0);
 
   const itensSelecionados = carrinho.filter(item => item.selecionado).length;
+
+  function handleFecharPedido() {
+    if (carrinho.length === 0) {
+      Alert.alert('Carrinho vazio', 'Adicione itens ao carrinho antes de fechar o pedido.');
+      return;
+    }
+    if (!carrinho.some(item => item.selecionado)) {
+      Alert.alert('Selecione um item', 'Selecione pelo menos um item para fechar o pedido.');
+      return;
+    }
+    router.push('/pagamento');
+  }
 
   return (
     <View style={[styles.container, { paddingBottom: 45 }]}>
@@ -72,33 +44,41 @@ export default function ModalScreen() {
         <Text style={styles.title2}>R$ {subtotal.toFixed(2)}</Text>
       </View>
 
-      <View style={styles.FecharPedidoBotao}>
+      <TouchableOpacity style={styles.FecharPedidoBotao} onPress={handleFecharPedido}>
         <Text style={styles.FecharPedidoBotaoTexto}>
           Fechar Pedido ({itensSelecionados} itens)
         </Text>
-      </View>
+      </TouchableOpacity>
       <View style={styles.separator} lightColor="#049A2A" darkColor="#4BD37B" />
 
       <TouchableOpacity onPress={desmarcarTodos}>
         <Text style={styles.title3}>Desmarcar todos os itens</Text>
       </TouchableOpacity>
 
-      <FlatList
-        data={carrinho}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <CarrinhoItemCard
-            produto={item}
-            quantidade={item.quantidade}
-            selecionado={item.selecionado}
-            onIncrementar={() => incrementar(item.id)}
-            onDecrementar={() => decrementar(item.id)}
-            onRemover={() => remover(item.id)}
-            onSelecionar={() => selecionar(item.id)}
-          />
-        )}
-        style={{ marginTop: 10 }}
-      />
+      {carrinho.length === 0 ? (
+        <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
+          <Text style={{ fontSize: 20, color: '#049A2A', marginTop: 40, backgroundColor: 'white', textDecorationLine: 'underline', }}>
+            O carrinho está vazio
+          </Text>
+        </View>
+      ) : (
+        <FlatList
+          data={carrinho}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <CarrinhoItemCard
+              produto={item}
+              quantidade={item.quantidade}
+              selecionado={item.selecionado}
+              onIncrementar={() => incrementar(item.id)}
+              onDecrementar={() => decrementar(item.id)}
+              onRemover={() => remover(item.id)}
+              onSelecionar={() => selecionar(item.id)}
+            />
+          )}
+          style={{ marginBottom: 60 }}
+        />
+      )}
 
       <BarraInferior />
     </View>
