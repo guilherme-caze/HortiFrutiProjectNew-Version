@@ -57,7 +57,7 @@ export default function CadastroScreen() {
       <View style={styles.container}>
         <View style={styles.card}>
 
-          <TouchableOpacity onPress={() => router.replace('/carrinho')}>
+          <TouchableOpacity onPress={() => router.replace('/Carrinho')}>
             <Image
               source={require('../../assets/images/seta.png')}
               style={styles.image}

@@ -9,29 +9,28 @@ export default function AtacadoScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity onPress={() => router.replace('/favoritos')} style={styles.voltar}>
-  <Image
-        source={require('@/assets/images/voltar.png')}
-        style={styles.imagemV}
-      />
-</TouchableOpacity>
+        <Image
+          source={require('@/assets/images/voltar.png')}
+          style={styles.imagemV}
+        />
+      </TouchableOpacity>
 
+      <View style={styles.headerContainer}>
+        <Image
+          source={require('@/assets/images/HortiFrutiZe.png')}
+          style={styles.imagem}
+        />
 
-      <Image
-        source={require('@/assets/images/HortiFrutiZe.png')}
-        style={styles.imagem}
-      />
-
-      <Text style={styles.titulo}>Hortifruti Seu Zé</Text>
-      <Text style={styles.descricao}>
-        Aqui no Hortifruti do Seu Zé, oferecemos frutas, legumes e verduras fresquinhos, direto da roça para sua mesa. Com um atendimento acolhedor e produtos de qualidade, garantimos sabor e frescor em cada escolha. Venha conferir!
-      </Text>
+        <Text style={styles.titulo}>Hortifruti Seu Zé</Text>
+        <Text style={styles.descricao}>
+          Frutas, legumes e verduras fresquinhos no Hortifruti do Seu Zé. Qualidade, sabor e atendimento acolhedor te esperam!
+        </Text>
+      </View>
 
       <View style={styles.produtosContainer}>
         <Text style={styles.subtitulo}>Produtos</Text>
-        
         {/* Cards de produtos do Atacado aqui */}
         <CarrosselProdutos />
-        
       </View>
     </SafeAreaView>
   );
@@ -45,7 +44,15 @@ const styles = StyleSheet.create({
   },
   voltar: {
     marginBottom: 10,
-    marginTop: -50,
+    marginTop: -40,
+  },
+  headerContainer: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    alignItems: 'center',
+    padding: 10,
+    marginBottom: 16,
+    elevation: 4, 
   },
   imagem: {
     width: '100%',
@@ -60,19 +67,21 @@ const styles = StyleSheet.create({
     height: 35,
   },
   titulo: {
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: 'bold',
     color: 'orange',
     marginBottom: 8,
+    textAlign: 'center',
   },
   descricao: {
-    fontSize: 16,
+    fontSize: 18,
     color: '#333',
     marginBottom: 20,
+    textAlign: 'center',
   },
   produtosContainer: {
     marginTop: 10,
-    marginBottom: 10, //aquiiiiiii
+    marginBottom: 10,
   },
   subtitulo: {
     fontSize: 18,

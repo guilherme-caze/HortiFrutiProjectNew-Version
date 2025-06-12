@@ -3,6 +3,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useState } from 'react';
 import React from 'react';
 import { useCarrinho } from './CarrinhoContext'; 
+import { useFavoritos } from '@/app/componentes/FavoritosContext';
 
 // top 10 códigos dos animes
 
@@ -46,7 +47,16 @@ const produtos = [
 ];
 
 // Componente separado para o Card
-export function ProdutoCard({ item, onAdicionar, favorito, onFavoritar, carrossel, customStyles }) {
+export function ProdutoCard({ item, onAdicionar, carrossel, customStyles }) {
+  const { adicionarFavorito, removerFavorito, isFavorito } = useFavoritos();
+
+  const favorito = isFavorito(item.id);
+
+  function handleFavoritar() {
+    if (favorito) removerFavorito(item.id);
+    else adicionarFavorito(item);
+  }
+
   // Use os estilos do customStyles se vierem por prop, senão use os padrões
   const s = customStyles || styles;
 
@@ -73,7 +83,7 @@ export function ProdutoCard({ item, onAdicionar, favorito, onFavoritar, carrosse
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => onFavoritar(item.id)}
+          onPress={handleFavoritar}
           style={carrossel ? s.carrosselCoracao : s.coracao}
         >
           <FontAwesome

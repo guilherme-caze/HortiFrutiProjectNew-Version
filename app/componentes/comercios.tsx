@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 const produtos = [
   {
     id: '1',
-    nome: 'Atacado das Frutas',
+    nome: 'Atacado da Fruta',
     imagem: require('../../assets/images/AtacadoFruta.png'),
   },
   {
@@ -50,7 +50,7 @@ export default function Cards() {
 const styles = StyleSheet.create({
   lista: {
     paddingHorizontal: 10,
-    paddingBottom: 180,
+    paddingBottom: 10, // ou 0 para remover o espaço extra
   },
   card: {
     flex: 1,
