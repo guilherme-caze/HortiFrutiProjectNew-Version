@@ -2,38 +2,39 @@ import { FlatList, Image, Text, View, StyleSheet, TouchableOpacity, Alert } from
 import { FontAwesome } from '@expo/vector-icons';
 import { useState } from 'react';
 import { useCarrinho } from '../componentes/CarrinhoContext';
+import { useFavoritos } from '@/app/componentes/FavoritosContext';
 
 const produtos = [
   {
-    id: '1',
+    id: '1011',
     nome: 'Abobora',
     preco: 19.99,
     unidade: 'un',
     imagem: require('../../assets/images/Abobora.png'),
   },
   {
-    id: '2',
+    id: '2022',
     nome: 'Brocolis',
     preco: 2.99,
     unidade: 'kg',
     imagem: require('../../assets/images/Brocolis.png'),
   },
   {
-    id: '3',
+    id: '4044',
     nome: 'Beterraba',
     preco: 5.99,
     unidade: 'kg',
     imagem: require('../../assets/images/Beterraba.png'),
   },
   {
-    id: '4',
+    id: '5055',
     nome: 'Cebola',
     preco: 3.00,
     unidade: 'un',
     imagem: require('../../assets/images/Cebola.png'),
   },
   {
-    id: '5',
+    id: '1',
     nome: 'Alecrim',
     preco: 4.99,
     unidade: 'kg',
@@ -42,7 +43,15 @@ const produtos = [
 ];
 
 // Componente separado para o Card
-function ProdutoCard({ item, onAdicionar, favorito, onFavoritar }) {
+function ProdutoCard({ item, onAdicionar }) {
+  const { adicionarFavorito, removerFavorito, isFavorito } = useFavoritos();
+  const favorito = isFavorito(item.id);
+
+  function handleFavoritar() {
+    if (favorito) removerFavorito(item.id);
+    else adicionarFavorito(item);
+  }
+
   return (
     <View style={styles.card}>
       <Image source={item.imagem} style={styles.imagem} />
@@ -58,7 +67,7 @@ function ProdutoCard({ item, onAdicionar, favorito, onFavoritar }) {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.coracao}
-          onPress={() => onFavoritar(item.id)}
+          onPress={handleFavoritar}
           activeOpacity={0.7}
         >
           <FontAwesome
