@@ -2,6 +2,7 @@ import { FlatList, Image, Text, View, StyleSheet, TouchableOpacity, Alert } from
 import { FontAwesome } from '@expo/vector-icons';
 import { useState } from 'react';
 import { useCarrinho } from '../componentes/CarrinhoContext';
+import { useFavoritos } from '@/app/componentes/FavoritosContext';
 
 const produtos = [
   {
@@ -28,7 +29,15 @@ const produtos = [
 ];
 
 // Componente separado para o Card
-function ProdutoCard({ item, onAdicionar, favorito, onFavoritar }) {
+function ProdutoCard({ item, onAdicionar }) {
+  const { adicionarFavorito, removerFavorito, isFavorito } = useFavoritos();
+  const favorito = isFavorito(item.id);
+
+  function handleFavoritar() {
+    if (favorito) removerFavorito(item.id);
+    else adicionarFavorito(item);
+  }
+
   return (
     <View style={styles.card}>
       <Image source={item.imagem} style={styles.imagem} />
@@ -44,7 +53,7 @@ function ProdutoCard({ item, onAdicionar, favorito, onFavoritar }) {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.coracao}
-          onPress={() => onFavoritar(item.id)}
+          onPress={handleFavoritar}
           activeOpacity={0.7}
         >
           <FontAwesome
