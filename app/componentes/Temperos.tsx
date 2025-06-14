@@ -19,7 +19,7 @@ const produtos = [
     imagem: require('../../assets/images/Açafrão.png'),
   },
   {
-    id: '3',
+    id: '4',
     nome: 'Cominho',
     preco: 0.99,
     unidade: 'un',

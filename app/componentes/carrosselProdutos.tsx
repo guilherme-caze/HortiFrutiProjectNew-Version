@@ -6,7 +6,7 @@ import { useFavoritos } from '@/app/componentes/FavoritosContext';
 
 const produtos = [
   {
-    id: '1',
+    id: '303',
     nome: 'Abacaxi',
     preco: 6.99,
     unidade: 'un',
@@ -34,7 +34,7 @@ const produtos = [
     imagem: require('../../assets/images/Cominho.png'),
   },
   {
-    id: '5',
+    id: '50',
     nome: 'Tomate',
     preco: 4.99,
     unidade: 'kg',

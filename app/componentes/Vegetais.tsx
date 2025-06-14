@@ -4,12 +4,12 @@ import { useState } from 'react';
 import { useCarrinho } from '../componentes/CarrinhoContext';
 
 const produtos = [
-  { id: '1', nome: 'Abóbora', preco: 8.99, unidade: 'kg', imagem: require('../../assets/images/Abobora.png') },
-  { id: '2', nome: 'Brócolis', preco: 2.99, unidade: 'kg', imagem: require('../../assets/images/Brocolis.png') },
-  { id: '3', nome: 'Tomate', preco: 4.99, unidade: 'kg', imagem: require('../../assets/images/Tomate.png') },
-  { id: '4', nome: 'Beterraba', preco: 3.50, unidade: 'kg', imagem: require('../../assets/images/Beterraba.png') },
-  { id: '5', nome: 'Cebola', preco: 7.99, unidade: 'kg', imagem: require('../../assets/images/Cebola.png') },
-  { id: '6', nome: 'Mandioca', preco: 10.99, unidade: 'kg', imagem: require('../../assets/images/Mandioca.png') },
+  { id: '1011', nome: 'Abóbora', preco: 8.99, unidade: 'kg', imagem: require('../../assets/images/Abobora.png') },
+  { id: '2022', nome: 'Brócolis', preco: 2.99, unidade: 'kg', imagem: require('../../assets/images/Brocolis.png') },
+  { id: '50', nome: 'Tomate', preco: 4.99, unidade: 'kg', imagem: require('../../assets/images/Tomate.png') },
+  { id: '4044', nome: 'Beterraba', preco: 3.50, unidade: 'kg', imagem: require('../../assets/images/Beterraba.png') },
+  { id: '5055', nome: 'Cebola', preco: 7.99, unidade: 'kg', imagem: require('../../assets/images/Cebola.png') },
+  { id: '6066', nome: 'Mandioca', preco: 10.99, unidade: 'kg', imagem: require('../../assets/images/Mandioca.png') },
 ];
 
 // Componente separado para o Card

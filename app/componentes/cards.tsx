@@ -9,39 +9,45 @@ import { useFavoritos } from '@/app/componentes/FavoritosContext';
 
 const produtos = [
   {
-    id: '1',
+    id: '101',
     nome: 'Maçã',
-    preco: 'R$ 4,99/kg',
+    preco: 4.99,
+    unidade: 'kg',
     imagem: require('../../assets/images/Maçãs.png'),
   },
   {
-    id: '2',
+    id: '202',
     nome: 'Banana',
-    preco: 'R$ 3,49/kg',
+    preco: 3.49,
+    unidade: 'kg',
     imagem: require('../../assets/images/bananas.jpg'),
   },
   {
-    id: '3',
+    id: '303',
     nome: 'Abacaxi',
-    preco: 'R$ 6,99/un',
+    preco: 6.99,
+    unidade: 'un',
     imagem: require('../../assets/images/Abacaxi.png'),
   },
   {
-    id: '4',
+    id: '404',
     nome: 'Pera',
-    preco: 'R$ 5,99/kg',
+    preco: 5.99,
+    unidade: 'kg',
     imagem: require('../../assets/images/Pera.png'),
   },
   {
-    id: '5',
+    id: '505',
     nome: 'Melancia',
-    preco: 'R$ 9,99/un',
+    preco: 9.99,
+    unidade: 'un',
     imagem: require('../../assets/images/Melancia.png'),
   },
   {
-    id: '6',
+    id: '606',
     nome: 'Laranja',
-    preco: 'R$ 2,99/kg',
+    preco: 2.99,
+    unidade: 'kg',
     imagem: require('../../assets/images/Laranja.png'),
   },
 ];
@@ -102,17 +108,23 @@ export default function Cards() {
   const { adicionarProduto } = useCarrinho();
 
   function handleAdicionar(item: any) {
-    // Aqui converta o preço para número, se necessário
     let preco = item.preco;
     if (typeof preco === 'string') {
-      preco = Number(preco.replace(/[^\d,]/g, '').replace(',', '.'));
+      // Remove 'R$', '/kg', '/un', vírgula por ponto
+      preco = Number(
+        preco
+          .replace(/[^\d,]/g, '') // Remove tudo que não é número ou vírgula
+          .replace(',', '.')      // Troca vírgula por ponto
+      );
     }
+  
     adicionarProduto({
       id: item.id,
       nome: item.nome,
-      preco,
+      preco: preco,
       imagem: item.imagem,
     });
+  
     Alert.alert('Adicionado', `${item.nome} foi adicionado ao carrinho!`);
   }
 
