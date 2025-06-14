@@ -2,21 +2,27 @@ import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Text, View } from '@/components/Themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import BarraInferior from '@/app/componentes/barraInferior';
+import { router } from 'expo-router';
 
 export default function TabOneScreen() {
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea} edges={['left', 'right', 'bottom']}>
       <View style={styles.container}>
-        
-        {/* Título com ícone */}
-        <View style={styles.header}>
-          <Text style={styles.headerText}>Endereços</Text>
+
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => router.push('/perfil')} style={styles.setaButton}>
+            <Image
+              source={require('../../assets/images/voltar.png')}
+              style={styles.itemImageLarge}
+            />
+          </TouchableOpacity>
+            <Text style={styles.headerText}>Endereços</Text>
           <Image
             source={require('../../assets/images/enderecoSaldo.png')}
-            style={styles.headerIcon}
-          />
+            style={styles.itemImageLarge}
+           />
         </View>
-
+        
         {/* saldo do usuario melhorado */}
         <View style={styles.saldoContainer}>
           <Text style={styles.saldoTexto}>Endereço principal:</Text>
@@ -55,6 +61,7 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: '#fff',
+    paddingTop: 0,
   },
   container: {
     flex: 1,
@@ -79,6 +86,10 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     resizeMode: 'contain',
+  },
+  itemImageLarge: {
+    width: 40,
+    height: 40,
   },
 
   // Saldo
@@ -139,5 +150,8 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  setaButton: {
+    padding: 8,
   },
 });

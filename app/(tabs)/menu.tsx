@@ -8,7 +8,7 @@ import BarraInferior from '@/app/componentes/barraInferior';
 
 export default function TabOneScreen() {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={styles.safeArea} edges={['left', 'right', 'bottom']}>
       <View style={styles.container}>
         {/* menu */}
         <TipoProduto />
@@ -32,10 +32,15 @@ export default function TabOneScreen() {
 
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
     backgroundColor: '#f5f5f5',
-    marginTop: -35, //Arrumando o buraco
+    paddingTop: 0,
+    },
+  container: {
+    flex: 1,
+    paddingHorizontal: 20,
+    backgroundColor: '#f5f5f5'
   },
   title1: {
     fontSize: 24,

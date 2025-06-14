@@ -7,7 +7,7 @@ import { router } from 'expo-router';
 
 export default function TabOneScreen() {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={styles.safeArea} edges={['left', 'right', 'bottom']}>
       <View style={styles.container}>
 
         {/* nome de usuário */}
@@ -89,7 +89,7 @@ export default function TabOneScreen() {
             <Text style={styles.itemTitle}>Favoritos</Text>
             <Text style={styles.itemSubtitle}>Meus favoritos</Text>
           </View>
-          <TouchableOpacity onPress={() => console.log('Seta pressionada')} style={styles.setaButton}>
+          <TouchableOpacity onPress={() => router.push('/favoritos')} style={styles.setaButton}>
             <Feather name="chevron-right" size={28} color="#aaa" />
           </TouchableOpacity>
         </View>
@@ -132,10 +132,16 @@ export default function TabOneScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
     backgroundColor: '#fff',
-    marginTop: -35, //Arrumando o buraco
+    paddingTop: 0,
+  },
+  container: {
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    backgroundColor: '#fff'
   },
   itemSimple: {
     flexDirection: 'row',

@@ -9,9 +9,8 @@ export default function TelaBuscaProdutos() {
   const [busca, setBusca] = useState('');
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
-
+    <SafeAreaView style={styles.safeArea} edges={['left', 'right', 'bottom']}>
+    <View style={styles.container}>
         <Image
           source={require('../../assets/images/CenouraLogo.png')}
           style={styles.cenouraLogo}
@@ -35,11 +34,16 @@ export default function TelaBuscaProdutos() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
+const styles = StyleSheet.create({safeArea: {
+  flex: 1,
+  backgroundColor: '#fff',
+  paddingBottom: 20, 
+},
+container: {
     flex: 1,
-    backgroundColor: '#fff',
-    marginTop: -35, //Arrumando o buraco
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    backgroundColor: '#fff'
   },
   barraBusca: {
     flexDirection: 'row',

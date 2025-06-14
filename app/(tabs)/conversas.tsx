@@ -7,8 +7,7 @@ import { router } from 'expo-router';
 
 export default function TabOneScreen() {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-
+    <SafeAreaView style={styles.safeArea} edges={['left', 'right', 'bottom']}>
       <View style={styles.container}>
 
         <View style={styles.itemSimple}>
@@ -124,9 +123,15 @@ export default function TabOneScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  container: {
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    backgroundColor: '#fff'
   },
   itemSimple: {
     flexDirection: 'row',
@@ -136,8 +141,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   itemImageLarge: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
   },
   itemTitleLarge: {
     fontSize: 30,

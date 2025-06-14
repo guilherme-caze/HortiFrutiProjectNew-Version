@@ -6,7 +6,7 @@ import { router } from 'expo-router';
 
 export default function TabOneScreen() {
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea} edges={['left', 'right', 'bottom']}>
       <View style={styles.container}>
         
         {/* Título com ícone */}
@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: '#fff',
+    paddingTop: 0, 
   },
   container: {
     flex: 1,
