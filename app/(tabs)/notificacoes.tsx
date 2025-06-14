@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   itemImageLarge: {
     width: 40,
     height: 40,
-    marginRight: 60,
+    marginRight: 40,
   },
   itemTitleLarge: {
     fontSize: 20,

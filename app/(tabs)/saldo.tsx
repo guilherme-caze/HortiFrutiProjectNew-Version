@@ -75,13 +75,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 24,
+    marginTop: 24,
     backgroundColor: '#fff',
   },
   headerText: {
     fontSize: 28,
     fontWeight: 'bold',
     color: '#FFA500',
-    marginRight: 10,
+    marginRight: 20,
+    marginLeft: 20,
   },
   headerIcon: {
     width: 40,

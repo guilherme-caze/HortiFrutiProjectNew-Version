@@ -18,11 +18,11 @@ export default function TabOneScreen() {
               style={styles.itemImageLarge}
             />
           </TouchableOpacity>
+          <Text style={styles.itemTitleLarge}>Ajuda</Text>
           <Image
             source={require('../../assets/images/ajuda.png')}
             style={styles.itemImageLarge}
           />
-          <Text style={styles.itemTitleLarge}>Ajuda</Text>
         </View>
 
         {/* Caso 1 */}
@@ -115,7 +115,8 @@ const styles = StyleSheet.create({
   itemSimple: {
     flexDirection: 'row',
     alignItems: 'center',
-    margin: 16,
+    justifyContent: 'center',
+    margin: 1,
     backgroundColor: '#fff',
   },
   itemImageLarge: {
@@ -127,6 +128,8 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '600',
     color: '#FFA500',
+    marginRight: 20,
+    marginLeft: 20, 
   },
   itemContainer: {
     flexDirection: 'row',

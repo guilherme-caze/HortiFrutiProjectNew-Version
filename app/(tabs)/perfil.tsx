@@ -13,7 +13,7 @@ export default function TabOneScreen() {
         {/* nome de usuário */}
         <View style={styles.itemSimple}>
           <Image
-            source={require('../../assets/images/perfil.png')}
+            source={require('../../assets/images/usuario.png')}
             style={styles.itemImageLarge}
           />
           <Text style={styles.itemTitleLarge}>Nome de usuário</Text>
@@ -139,26 +139,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     backgroundColor: '#fff'
   },
   itemSimple: {
@@ -171,6 +151,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     marginRight: 10,
+    borderRadius:50,
   },
   itemTitleLarge: {
     fontSize: 20,
