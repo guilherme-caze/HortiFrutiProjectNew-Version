@@ -49,8 +49,7 @@ Desenvolver uma solução mobile intuitiva que permita ao usuário visualizar, s
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/HortiFruti.git
-   cd HortiFruti
+   git clone https://github.com/seu-usuario/HortiFrutiProjectNew-Version.git
    npm install
    npx expo start
 
