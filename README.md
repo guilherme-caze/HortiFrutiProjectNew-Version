@@ -73,3 +73,7 @@ Pressione “a” para abrir sua aplicação no Emulador após realização do b
 
 ⚠️ É preciso baixar o Expo Go no smartphone pela App Store ou Play Store
 
+## Vídeo para o Youtube
+
+https://youtu.be/XkVItROhtWc
+
